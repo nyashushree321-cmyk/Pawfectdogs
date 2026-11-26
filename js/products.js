@@ -38,7 +38,7 @@ const P=[
 const PRODUCTS=P.map(([id,name,cat,price,mrp,emoji,desc])=>({id,name,cat,price,mrp,emoji,desc}));
 PRODUCTS.forEach(p => {
   p.img = `images/${p.id}.png`;
-  p.emoji = `<img src="${p.img}" alt="" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.replaceWith('${p.emoji}')">`;
+  p.emoji = `<img src="${p.img}" alt="${p.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.replaceWith('${p.emoji}')">`;
 });
 
 // // Real photos (keyword-matched, hosted by loremflickr.com). Replace with your own product photos later.
