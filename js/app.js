@@ -6,13 +6,26 @@ const cart={mem:{},get(){try{return JSON.parse(localStorage.getItem('bw_cart'))|
  count(){return Object.values(this.get()).reduce((a,b)=>a+b,0)}};
 function toast(m){let t=$('#toast');if(!t){t=document.createElement('div');t.id='toast';t.setAttribute('role','status');document.body.appendChild(t)}
  t.innerHTML=m+' <a href="cart.html">View cart</a>';t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2400)}
-function badge(){$$('.cartcount').forEach(e=>e.textContent=cart.count())}
+function badge(){$$('.cartcount').forEach(e=>e.textContent=cart.count());steppers()}
+// Swap "Add to cart" for a − qty + control once the product is in the cart
+const stepCss=document.createElement('style');
+stepCss.textContent='.card [data-add],#product [data-add],.stepper{width:130px!important;height:38px;box-sizing:border-box;border-radius:8px!important}.card [data-add],#product [data-add]{padding:0!important;font-size:.95rem!important;line-height:38px!important}.card [data-add],.card .stepper{align-self:flex-start;margin-top:auto}.stepper{display:flex;align-items:center;justify-content:space-between;border:1.5px solid #17672f;background:#fff;color:#17672f;font-weight:800;overflow:hidden}#product .stepper{display:inline-flex;vertical-align:middle}.stepper button{border:0;background:#17672f;color:#fff;font:inherit;font-size:1.25rem;line-height:1;width:38px;height:100%;padding:0;cursor:pointer;touch-action:manipulation}';
+document.head.appendChild(stepCss);
+function steppers(){const c=cart.get();$$('[data-add]').forEach(b=>{const id=b.dataset.add,n=c[id]||0;
+ let s=b.nextElementSibling;if(!s||!s.classList.contains('stepper'))s=null;
+ if(!n){s?.remove();b.style.display='';return}
+ if(!s){s=document.createElement('div');s.className='stepper';
+  s.innerHTML=`<button type="button" data-step="${id}" data-d="-1" aria-label="Decrease quantity">−</button><span aria-live="polite"></span><button type="button" data-step="${id}" data-d="1" aria-label="Increase quantity">+</button>`;
+  b.after(s)}
+ $('span',s).textContent=n;b.style.display='none'})}
 const card=p=>`<article class="card"><a href="product.html?id=${p.id}" class="pimg" aria-label="${p.name}">${p.emoji}</a><div class="body"><span class="tag">${CATS[p.cat][0]}</span><h3><a href="product.html?id=${p.id}">${p.name}</a></h3><div class="price">${money(p.price)}<s>${money(p.mrp)}</s></div><button class="btn" data-add="${p.id}">Add to cart</button></div></article>`;
 document.addEventListener('click',e=>{
  const a=e.target.closest('[data-add]');
- if(a){cart.add(+a.dataset.add);toast('Added to cart ✓');const t=a.textContent;a.textContent='Added ✓';setTimeout(()=>a.textContent=t,1200)}
+ if(a){cart.add(+a.dataset.add);toast('Added to cart ✓')}
+ const st=e.target.closest('[data-step]');
+ if(st){const c=cart.get(),id=st.dataset.step;c[id]=(c[id]||0)+ +st.dataset.d;if(c[id]<1)delete c[id];cart.set(c)}
  if(e.target.id==='burger')$('nav.main').classList.toggle('open');
- const cp=e.target.closest('[data-copy]');if(cp){navigator.clipboard?.writeText(cp.dataset.copy);cp.textContent='Copied';setTimeout(()=>cp.textContent='Copy',1200)}
+ const cp=e.target.closest('[data-copy]');if(cp){navigator.clipboard?.writeText(cp.dataset.copy);cp.textContent='Copied ✓'}
 });
 // Listing pages
 const grid=$('#grid');
@@ -20,7 +33,7 @@ if(grid){const cat=document.body.dataset.cat;
  const draw=()=>{let l=PRODUCTS.filter(p=>cat==='all'||p.cat===cat);
   const q=($('#q')?.value||'').toLowerCase();if(q)l=l.filter(p=>(p.name+p.desc).toLowerCase().includes(q));
   const s=$('#sort')?.value;if(s==='lo')l.sort((a,b)=>a.price-b.price);if(s==='hi')l.sort((a,b)=>b.price-a.price);
-  grid.innerHTML=l.length?l.map(card).join(''):'<p>No products match. Try a different search.</p>'};
+  grid.innerHTML=l.length?l.map(card).join(''):'<p>No products match. Try a different search.</p>';steppers()};
  const qp=new URLSearchParams(location.search).get('q');if(qp&&$('#q'))$('#q').value=qp;$('#q')?.addEventListener('input',draw);$('#sort')?.addEventListener('change',draw);draw()}
 // Home featured
 const feat=$('#featured');if(feat)feat.innerHTML=[1,10,16,20,24,29,13,6].map(i=>card(PRODUCTS.find(p=>p.id===i))).join('');
@@ -44,3 +57,5 @@ $$('[data-form]').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();
  if(f.dataset.form==='order'){if(!cart.count()){$('.note',f).textContent='Your cart is empty. Add something first.';$('.note',f).classList.add('show');return}cart.set({})}
  const n=$('.note',f);n.textContent=f.dataset.msg;n.classList.add('show');f.reset()}));
 badge();
+// Keep quantities correct after the Back button or changes in another tab
+addEventListener('pageshow',badge);addEventListener('storage',badge);
