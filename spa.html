@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Pet spa | Pawfect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div class="top">📍 Delivering in Bengaluru · Free delivery above ₹999 · Vet-approved products</div>
+    <header class="site">
+      <div class="wrap bar">
+        <a class="logo" href="index.html">
+          Paw
+          <span>fect</span>
+        </a>
+        <form class="search" action="shop.html">
+          <input name="q" type="search" placeholder="Search for &quot;Dog Food&quot;" aria-label="Search products">
+        </form>
+        <button id="burger" aria-label="Menu">☰</button>
+        <nav class="main">
+          <div class="dd">
+            <button>Shop ▾</button>
+            <div class="menu">
+              <a href="shop.html">All products</a>
+              <a href="dry-food.html">Dry food</a>
+              <a href="wet-food.html">Wet food</a>
+              <a href="jackets.html">Jackets</a>
+              <a href="sweaters.html">Sweaters</a>
+              <a href="beds.html">Beds</a>
+              <a href="toys.html">Toys</a>
+              <a href="lifestyle.html">Lifestyle store</a>
+            </div>
+          </div>
+          <a href="pharmacy.html">Pharmacy</a>
+          <a href="spa.html">Pet spa</a>
+          <a href="clinic.html">Clinic</a>
+          <a href="blog.html">Care guides</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a class="cartlink" href="cart.html">
+            Cart
+            <span class="cartcount">0</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="pagehead">
+        <div class="wrap">
+          <h1 style="font-size:clamp(2rem,4vw,3rem)">Pet spa</h1>
+          <p>Gentle grooming by certified groomers. Fear-free handling, dog-safe products.</p>
+        </div>
+      </div>
+      <section>
+        <div class="wrap">
+          <div class="grid">
+            <div class="card">
+              <div class="pimg">
+                🛁
+                <img src="images/bathblow.jpg" alt="Bath & blow dry" loading="lazy" onerror="this.remove()">
+              </div>
+              <div class="body">
+                <h3>Bath & blow dry</h3>
+                <p class="tag">Shampoo, conditioner, ear clean</p>
+                <div class="price">₹699</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="pimg">
+                ✂️
+                <img src="images/fullgroom.jpeg" alt="Full groom" loading="lazy" onerror="this.remove()">
+              </div>
+              <div class="body">
+                <h3>Full groom</h3>
+                <p class="tag">Bath, haircut, nails, sanitary trim</p>
+                <div class="price">₹1,499</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="pimg">
+                💅
+                <img src="images/nail.webp" alt="Nail & paw care" loading="lazy" onerror="this.remove()">
+              </div>
+              <div class="body">
+                <h3>Nail & paw care</h3>
+                <p class="tag">Trim, file and paw balm</p>
+                <div class="price">₹299</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="pimg">
+                🦷
+                <img src="images/teethbrush.jpg" alt="Teeth brushing" loading="lazy" onerror="this.remove()">
+              </div>
+              <div class="body">
+                <h3>Teeth brushing</h3>
+                <p class="tag">Enzyme paste, fresh breath</p>
+                <div class="price">₹349</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="pimg">
+                🌿
+                <img src="images/tick.webp" alt="Tick & flea bath" loading="lazy" onerror="this.remove()">
+              </div>
+              <div class="body">
+                <h3>Tick & flea bath</h3>
+                <p class="tag">Medicated, vet-approved</p>
+                <div class="price">₹899</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="pimg">
+                🧖
+                <img src="images/spapackage.jpg" alt="Spa package" loading="lazy" onerror="this.remove()">
+              </div>
+              <div class="body">
+                <h3>Spa package</h3>
+                <p class="tag">Groom, massage, aromatherapy</p>
+                <div class="price">₹2,199</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="band">
+        <div class="wrap">
+          <div class="panel" style="max-width:600px">
+            <h2>Book a spa slot</h2>
+            <form data-form="spa" data-msg="Spa slot requested. We will confirm by phone (demo only).">
+              <label>
+                Your name
+                <input type="text" required>
+              </label>
+              <label>
+                Phone
+                <input type="tel" required>
+              </label>
+              <label>
+                Dog name and breed
+                <input type="text" required>
+              </label>
+              <label>
+                Service
+                <select>
+                  <option>Bath & blow dry</option>
+                  <option>Full groom</option>
+                  <option>Nail & paw care</option>
+                  <option>Teeth brushing</option>
+                  <option>Tick & flea bath</option>
+                  <option>Spa package</option>
+                </select>
+              </label>
+              <label>
+                Preferred date
+                <input type="date" required>
+              </label>
+              <button class="btn" style="margin-top:1.2rem">Request slot</button>
+              <p class="note" role="status"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site">
+      <div class="wrap">
+        <div class="cols">
+          <div>
+            <h3>Pawfect</h3>
+            <p>Food, care and gear for happy dogs. Shop, book a spa day or see a vet, all in one place.</p>
+          </div>
+          <div>
+            <h3>Shop</h3>
+            <a href="dry-food.html">Dry food</a>
+            <a href="wet-food.html">Wet food</a>
+            <a href="jackets.html">Jackets</a>
+            <a href="sweaters.html">Sweaters</a>
+            <a href="beds.html">Beds</a>
+            <a href="toys.html">Toys</a>
+          </div>
+          <div>
+            <h3>Care</h3>
+            <a href="pharmacy.html">Pharmacy</a>
+            <a href="spa.html">Pet spa</a>
+            <a href="clinic.html">Clinic</a>
+            <a href="blog.html">Care guides</a>
+          </div>
+          <div>
+            <h3>Help</h3>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Sign in</a>
+            <a href="about.html">About us</a>
+          </div>
+        </div>
+        <small>© 2026 Pawfect. Demo store: orders and bookings are not real.</small>
+      </div>
+    </footer>
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
