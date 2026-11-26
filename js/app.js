@@ -59,3 +59,12 @@ $$('[data-form]').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();
 badge();
 // Keep quantities correct after the Back button or changes in another tab
 addEventListener('pageshow',badge);addEventListener('storage',badge);
+
+// Nutritail logo in the header and browser tab on every page that loads this file
+$$('a.logo').forEach(a=>{a.innerHTML='<img src="images/nutritail-logo.png" alt="Nutritail">';a.setAttribute('aria-label','Nutritail home')});
+const logoCss=document.createElement('style');
+logoCss.textContent='a.logo{flex:none;align-items:center}a.logo img{display:block;height:56px;width:auto;max-width:none}@media(max-width:600px){header.site .bar{width:auto;margin:0 10px;gap:7px}a.logo img{height:28px}header.site .search{flex:1 1 0;min-width:0}header.site .search input{width:100%;height:40px;padding:0 12px}header.site .cart-mini{flex:none;height:38px;padding:0 9px;gap:3px}#burger{flex:none;width:38px;height:38px;padding:0}}@media(max-width:350px){a.logo img{height:25px}}';
+document.head.appendChild(logoCss);
+let icon=$('link[rel="icon"]');if(!icon){icon=document.createElement('link');icon.rel='icon';document.head.appendChild(icon)}icon.href='images/nutritail-icon.png';
+// Shorter search hint on phones so it isn't cut off
+if(matchMedia('(max-width:600px)').matches)$$('header .search input').forEach(i=>i.placeholder='Search');
